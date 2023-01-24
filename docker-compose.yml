@@ -18,7 +18,7 @@ services:
             - php
             - mysqldb
     php:
-        image: nanoninja/php-fpm:${PHP_VERSION}
+        image: qwe2003/php-chrome:latest
         restart: always
         volumes:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
@@ -26,7 +26,7 @@ services:
     composer:
         image: "composer"
         volumes:
-            - "./web/app:/app"
+            - "./web:/app"
         command: install
     myadmin:
         image: phpmyadmin/phpmyadmin
@@ -40,6 +40,7 @@ services:
         depends_on:
             - mysqldb
     mysqldb:
+        platform: linux/x86_64
         image: mysql:${MYSQL_VERSION}
         container_name: ${MYSQL_HOST}
         restart: always
